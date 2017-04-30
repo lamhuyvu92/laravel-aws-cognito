@@ -19,14 +19,14 @@ class ServiceProvider extends AuthServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/aws-cognito-auth.php' => config_path('aws-cognito-auth.php'),
-        ]);
+            __DIR__ . '/../config/aws-cognito-auth.php' => config_path('aws-cognito-auth.php'),
+        ], 'config');
 
         $this->app->singleton('aws-cognito-sdk', function (Application $app) {
             return new \Aws\Sdk(config('aws-cognito-auth'));
         });
 
-        $this->app->share(CacheItemPoolInterface::class, function () {
+        $this->app->bind(CacheItemPoolInterface::class, function () {
             $repository = $this->app->make(Repository::class);
 
             return new CacheItemPool($repository);
