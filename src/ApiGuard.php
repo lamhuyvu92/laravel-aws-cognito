@@ -49,6 +49,12 @@ class ApiGuard implements Guard
         return $this->accessToken;
     }
 
+    public function logout()
+    {
+        $this->accessToken = null;
+        $this->user = null;
+    }
+
     /**
      * @param array $credentials
      *
