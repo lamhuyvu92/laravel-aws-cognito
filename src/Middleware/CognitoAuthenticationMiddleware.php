@@ -1,7 +1,7 @@
 <?php
-namespace App\LaravelAwsCognito\Middleware;
+namespace pmill\LaravelAwsCognito\Middleware;
 
-use App\LaravelAwsCognito\ApiGuard;
+use pmill\LaravelAwsCognito\ApiGuard;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;

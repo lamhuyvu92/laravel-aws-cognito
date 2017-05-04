@@ -1,5 +1,5 @@
 <?php
-namespace App\LaravelAwsCognito;
+namespace pmill\LaravelAwsCognito;
 
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Authenticatable;

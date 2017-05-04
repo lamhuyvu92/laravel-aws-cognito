@@ -1,7 +1,6 @@
 <?php
 namespace pmill\LaravelAwsCognito;
 
-use App\LaravelAwsCognito\ApiGuard;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;

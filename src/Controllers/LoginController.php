@@ -1,7 +1,7 @@
 <?php
 namespace pmill\LaravelAwsCognito\Controllers;
 
-use App\LaravelAwsCognito\ApiGuard;
+use pmill\LaravelAwsCognito\ApiGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use pmill\AwsCognito\CognitoClient;
