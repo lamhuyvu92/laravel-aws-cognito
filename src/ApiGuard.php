@@ -22,6 +22,11 @@ class ApiGuard implements Guard
     protected $accessToken;
 
     /**
+     * @var string
+     */
+    protected $usernameField;
+
+    /**
      * ApiGuard constructor.
      *
      * @param UserProvider $userProvider
@@ -31,6 +36,7 @@ class ApiGuard implements Guard
     {
         $this->provider = $userProvider;
         $this->cognitoClient = $cognitoClient;
+        $this->usernameField = config('aws-cognito-auth.username_field');
     }
 
     /**
@@ -62,7 +68,7 @@ class ApiGuard implements Guard
      */
     public function validate(array $credentials = [])
     {
-        $username = array_get($credentials, 'username');
+        $username = array_get($credentials, $this->usernameField);
         $password = array_get($credentials, 'password');
         $this->attempt($username, $password);
         return $this->check();
@@ -86,7 +92,7 @@ class ApiGuard implements Guard
     {
         $username = $this->cognitoClient->verifyAccessToken($accessToken);
         $this->user = $this->provider->retrieveByCredentials([
-            'username' => $username,
+            $this->usernameField => $username,
         ]);
     }
 
@@ -99,7 +105,7 @@ class ApiGuard implements Guard
         $authenticationResponse = $this->cognitoClient->authenticate($username, $password);
         $this->accessToken = array_get($authenticationResponse, 'AccessToken');
         $this->user = $this->provider->retrieveByCredentials([
-            'username' => $username,
+            $this->usernameField => $username,
         ]);
     }
 }
