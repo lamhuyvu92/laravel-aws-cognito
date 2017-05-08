@@ -5,7 +5,9 @@ use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use pmill\AwsCognito\CognitoClient;
+use pmill\LaravelAwsCognito\Exceptions\CognitoUserNotFoundException;
 
 class ApiGuard implements Guard
 {
@@ -15,11 +17,6 @@ class ApiGuard implements Guard
      * @var CognitoClient
      */
     protected $cognitoClient;
-
-    /**
-     * @var string
-     */
-    protected $accessToken;
 
     /**
      * @var string
@@ -45,14 +42,6 @@ class ApiGuard implements Guard
     public function user()
     {
         return $this->user;
-    }
-
-    /**
-     * @return string
-     */
-    public function accessToken()
-    {
-        return $this->accessToken;
     }
 
     public function logout()
@@ -99,13 +88,29 @@ class ApiGuard implements Guard
     /**
      * @param string $username
      * @param string $password
+     *
+     * @return AuthenticationResponse
+     * @throws CognitoUserNotFoundException
      */
     public function attempt($username, $password)
     {
-        $authenticationResponse = $this->cognitoClient->authenticate($username, $password);
-        $this->accessToken = array_get($authenticationResponse, 'AccessToken');
+        $cognitoAuthenticationResponse = $this->cognitoClient->authenticate($username, $password);
+
+        $authenticationResponse = new AuthenticationResponse;
+        $authenticationResponse->setAccessToken(array_get($cognitoAuthenticationResponse, 'AccessToken'));
+        $authenticationResponse->setExpiresIn(array_get($cognitoAuthenticationResponse, 'ExpiresIn'));
+        $authenticationResponse->setIdToken(array_get($cognitoAuthenticationResponse, 'IdToken'));
+        $authenticationResponse->setRefreshToken(array_get($cognitoAuthenticationResponse, 'RefreshToken'));
+        $authenticationResponse->setTokenType(array_get($cognitoAuthenticationResponse, 'TokenType'));
+
         $this->user = $this->provider->retrieveByCredentials([
             $this->usernameField => $username,
         ]);
+
+        if (!$this->user) {
+            throw new CognitoUserNotFoundException();
+        }
+
+        return $authenticationResponse;
     }
 }
