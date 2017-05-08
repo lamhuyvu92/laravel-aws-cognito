@@ -24,6 +24,11 @@ class ApiGuard implements Guard
     protected $usernameField;
 
     /**
+     * @var AuthenticationResponse
+     */
+    protected $authenticationResponse;
+
+    /**
      * ApiGuard constructor.
      *
      * @param UserProvider $userProvider
@@ -111,6 +116,14 @@ class ApiGuard implements Guard
             throw new CognitoUserNotFoundException();
         }
 
-        return $authenticationResponse;
+        return $this->authenticationResponse = $authenticationResponse;
+    }
+
+    /**
+     * @return AuthenticationResponse
+     */
+    public function authenticationResponse()
+    {
+        return $this->authenticationResponse;
     }
 }
