@@ -51,7 +51,6 @@ class ApiGuard implements Guard
 
     public function logout()
     {
-        $this->accessToken = null;
         $this->user = null;
     }
 
@@ -77,6 +76,21 @@ class ApiGuard implements Guard
         $accessToken = trim(str_replace('Bearer', '', $authorizationHeader));
         $this->attemptWithToken($accessToken);
         return $this->check();
+    }
+
+    /**
+     * @param $refreshToken
+     *
+     * @return array
+     */
+    public function refreshAccessToken($refreshToken)
+    {
+        $authenticationResponse = $this->cognitoClient->refreshAuthentication(
+            $this->user->getAuthIdentifier(),
+            $refreshToken
+        );
+
+        return $this->authenticationResponse = $authenticationResponse;
     }
 
     /**

@@ -1104,16 +1104,16 @@
         },
         {
             "name": "pmill/aws-cognito",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pmill/aws-cognito.git",
-                "reference": "a0ee11568f615dec9698d23f46e6b320b666f47c"
+                "reference": "d31da5367cfd3e4692ee9ddbbd920a0bbd70edc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pmill/aws-cognito/zipball/a0ee11568f615dec9698d23f46e6b320b666f47c",
-                "reference": "a0ee11568f615dec9698d23f46e6b320b666f47c",
+                "url": "https://api.github.com/repos/pmill/aws-cognito/zipball/d31da5367cfd3e4692ee9ddbbd920a0bbd70edc7",
+                "reference": "d31da5367cfd3e4692ee9ddbbd920a0bbd70edc7",
                 "shasum": ""
             },
             "require": {
@@ -1145,7 +1145,7 @@
                 "aws",
                 "php"
             ],
-            "time": "2017-04-30 13:46:02"
+            "time": "2017-05-20 20:23:37"
         },
         {
             "name": "psr/cache",
