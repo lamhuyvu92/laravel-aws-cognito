@@ -82,11 +82,19 @@ class ApiGuard implements Guard
      * @param string $username
      * @param string $refreshToken
      *
-     * @return array
+     * @return AuthenticationResponse
      */
     public function refreshAccessToken($username, $refreshToken)
     {
-        $authenticationResponse = $this->cognitoClient->refreshAuthentication($username, $refreshToken);
+        $cognitoAuthenticationResponse = $this->cognitoClient->refreshAuthentication($username, $refreshToken);
+
+        $authenticationResponse = new AuthenticationResponse;
+        $authenticationResponse->setAccessToken(array_get($cognitoAuthenticationResponse, 'AccessToken'));
+        $authenticationResponse->setExpiresIn(array_get($cognitoAuthenticationResponse, 'ExpiresIn'));
+        $authenticationResponse->setIdToken(array_get($cognitoAuthenticationResponse, 'IdToken'));
+        $authenticationResponse->setRefreshToken(array_get($cognitoAuthenticationResponse, 'RefreshToken'));
+        $authenticationResponse->setTokenType(array_get($cognitoAuthenticationResponse, 'TokenType'));
+
         return $this->authenticationResponse = $authenticationResponse;
     }
 
