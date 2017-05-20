@@ -79,17 +79,14 @@ class ApiGuard implements Guard
     }
 
     /**
-     * @param $refreshToken
+     * @param string $username
+     * @param string $refreshToken
      *
      * @return array
      */
-    public function refreshAccessToken($refreshToken)
+    public function refreshAccessToken($username, $refreshToken)
     {
-        $authenticationResponse = $this->cognitoClient->refreshAuthentication(
-            $this->user->getAuthIdentifier(),
-            $refreshToken
-        );
-
+        $authenticationResponse = $this->cognitoClient->refreshAuthentication($username, $refreshToken);
         return $this->authenticationResponse = $authenticationResponse;
     }
 
