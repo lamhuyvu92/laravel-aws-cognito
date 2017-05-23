@@ -31,7 +31,7 @@ class AuthenticationResponse
     /**
      * @return string
      */
-    public function getAccessToken(): string
+    public function getAccessToken()
     {
         return $this->accessToken;
     }
@@ -39,7 +39,7 @@ class AuthenticationResponse
     /**
      * @param string $accessToken
      */
-    public function setAccessToken(string $accessToken)
+    public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
     }
@@ -47,7 +47,7 @@ class AuthenticationResponse
     /**
      * @return int
      */
-    public function getExpiresIn(): int
+    public function getExpiresIn()
     {
         return $this->expiresIn;
     }
@@ -55,7 +55,7 @@ class AuthenticationResponse
     /**
      * @param int $expiresIn
      */
-    public function setExpiresIn(int $expiresIn)
+    public function setExpiresIn($expiresIn)
     {
         $this->expiresIn = $expiresIn;
     }
@@ -63,7 +63,7 @@ class AuthenticationResponse
     /**
      * @return string
      */
-    public function getIdToken(): string
+    public function getIdToken()
     {
         return $this->idToken;
     }
@@ -71,7 +71,7 @@ class AuthenticationResponse
     /**
      * @param string $idToken
      */
-    public function setIdToken(string $idToken)
+    public function setIdToken($idToken)
     {
         $this->idToken = $idToken;
     }
@@ -79,7 +79,7 @@ class AuthenticationResponse
     /**
      * @return string
      */
-    public function getRefreshToken(): string
+    public function getRefreshToken()
     {
         return $this->refreshToken;
     }
@@ -87,7 +87,7 @@ class AuthenticationResponse
     /**
      * @param string $refreshToken
      */
-    public function setRefreshToken(string $refreshToken)
+    public function setRefreshToken($refreshToken)
     {
         $this->refreshToken = $refreshToken;
     }
@@ -95,7 +95,7 @@ class AuthenticationResponse
     /**
      * @return string
      */
-    public function getTokenType(): string
+    public function getTokenType()
     {
         return $this->tokenType;
     }
@@ -103,7 +103,7 @@ class AuthenticationResponse
     /**
      * @param string $tokenType
      */
-    public function setTokenType(string $tokenType)
+    public function setTokenType($tokenType)
     {
         $this->tokenType = $tokenType;
     }
