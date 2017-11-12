@@ -103,9 +103,10 @@ class ApiGuard implements Guard
      */
     public function attemptWithToken($accessToken)
     {
-        $username = $this->cognitoClient->verifyAccessToken($accessToken);
+        $cognitoUsername = $this->cognitoClient->verifyAccessToken($accessToken);
+
         $this->user = $this->provider->retrieveByCredentials([
-            $this->usernameField => $username,
+            'username' => $cognitoUsername,
         ]);
     }
 
@@ -127,8 +128,10 @@ class ApiGuard implements Guard
         $authenticationResponse->setRefreshToken(array_get($cognitoAuthenticationResponse, 'RefreshToken'));
         $authenticationResponse->setTokenType(array_get($cognitoAuthenticationResponse, 'TokenType'));
 
+        $cognitoUsername = $this->cognitoClient->verifyAccessToken($authenticationResponse->getAccessToken());
+
         $this->user = $this->provider->retrieveByCredentials([
-            $this->usernameField => $username,
+            'username' => $cognitoUsername,
         ]);
 
         if (!$this->user) {
