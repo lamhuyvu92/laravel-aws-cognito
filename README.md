@@ -83,6 +83,11 @@ Edit the `config/auth.php` file:
 Version History
 ---------------
 
+0.2.0 (12/11/2017)
+
+*   Upgraded pmill/aws-cognito dependency
+*   Updated login to fetch user by cognito username
+
 0.1.0 (30/04/2017)
 
 *   First public release of laravel-aws-cognito
