@@ -5,7 +5,6 @@ use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use pmill\AwsCognito\CognitoClient;
 use pmill\LaravelAwsCognito\Exceptions\CognitoUserNotFoundException;
 

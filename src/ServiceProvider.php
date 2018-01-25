@@ -25,12 +25,6 @@ class ServiceProvider extends AuthServiceProvider
             return new \Aws\Sdk(config('aws-cognito-auth'));
         });
 
-        $this->app->bind(CacheItemPoolInterface::class, function () {
-            $repository = $this->app->make(Repository::class);
-
-            return new CacheItemPool($repository);
-        });
-
         $this->app->singleton(CognitoClient::class, function (Application $app) {
             $awsCognitoIdentityProvider = $app->make('aws-cognito-sdk')->createCognitoIdentityProvider();
 
@@ -39,7 +33,6 @@ class ServiceProvider extends AuthServiceProvider
             $cognitoClient->setAppClientSecret(config('aws-cognito-auth.app_client_secret'));
             $cognitoClient->setRegion(config('aws-cognito-auth.region'));
             $cognitoClient->setUserPoolId(config('aws-cognito-auth.user_pool_id'));
-            $cognitoClient->downloadJwtWebKeys($app->make(CacheItemPoolInterface::class));
 
             return $cognitoClient;
         });
