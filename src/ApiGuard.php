@@ -1,11 +1,14 @@
 <?php
 namespace pmill\LaravelAwsCognito;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use pmill\AwsCognito\CognitoClient;
+use pmill\AwsCognito\Exception\TokenExpiryException;
+use pmill\AwsCognito\Exception\TokenVerificationException;
 use pmill\LaravelAwsCognito\Exceptions\CognitoUserNotFoundException;
 
 class ApiGuard implements Guard
@@ -99,9 +102,16 @@ class ApiGuard implements Guard
 
     /**
      * @param string $accessToken
+     * @throws AuthenticationException
+     * @throws TokenExpiryException
+     * @throws TokenVerificationException
      */
     public function attemptWithToken($accessToken)
     {
+        if (!$accessToken) {
+            throw new AuthenticationException();
+        }
+
         $cognitoUsername = $this->cognitoClient->verifyAccessToken($accessToken);
 
         $this->user = $this->provider->retrieveByCredentials([
