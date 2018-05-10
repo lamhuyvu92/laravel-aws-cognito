@@ -27,7 +27,7 @@ curl -sS https://getcomposer.org/installer | php
 Next, run the Composer command to install the latest version:
 
 ```bash
-composer.phar require pmill/laravel-aws-cognito
+composer.phar require lamhuyvu92/laravel-aws-cognito
 ```
 
 Usage
@@ -38,7 +38,7 @@ Add the service provider to the providers array in `config/app.php`.
 ```php
 'providers' => [
     ...
-    pmill\LaravelAwsCognito\ServiceProvider::class,
+    lamhuyvu92\LaravelAwsCognito\ServiceProvider::class,
     ...
 ]
 ```
@@ -49,7 +49,7 @@ Add the middleware to either the middleware groups or the middleware array in `a
 protected $middlewareGroups = [
     'api' => [
         ...
-        pmill\LaravelAwsCognito\Middleware\CognitoAuthenticationMiddleware,
+        lamhuyvu92\LaravelAwsCognito\Middleware\CognitoAuthenticationMiddleware,
         ...
     ],
 ];
@@ -58,7 +58,7 @@ protected $middlewareGroups = [
 ```php
 protected $routeMiddleware = [
     ...
-    'aws-cognito' => pmill\LaravelAwsCognito\Middleware\CognitoAuthenticationMiddleware,
+    'aws-cognito' => lamhuyvu92\LaravelAwsCognito\Middleware\CognitoAuthenticationMiddleware,
     ...
 ];
 ```
@@ -66,7 +66,7 @@ protected $routeMiddleware = [
 Publish then edit the config file.
 
 ```
-php artisan vendor:publish --provider="pmill\LaravelAwsCognito\ServiceProvider"
+php artisan vendor:publish --provider="lamhuyvu92\LaravelAwsCognito\ServiceProvider"
 ```
 
 Edit the `config/auth.php` file:
