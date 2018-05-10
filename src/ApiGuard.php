@@ -143,10 +143,6 @@ class ApiGuard implements Guard
             'username' => $cognitoUsername,
         ]);
 
-        if (!$this->user) {
-            throw new CognitoUserNotFoundException();
-        }
-
         return $this->authenticationResponse = $authenticationResponse;
     }
 
